@@ -23,7 +23,7 @@
 <div class="container-fluid">
 
   <!-- Vertical Layout | With Floating Label -->
-  <form action="{{route('admin.post.update', $post->id)}}" method="post" enctype="multipart/form-data">
+  <form action="{{route('author.post.update', $post->id)}}" method="post" enctype="multipart/form-data">
     @csrf
 
     @method('PUT')
@@ -116,7 +116,7 @@
 
 
                               <br>
-                              <a class="btn btn-danger m-t-15 waves-effect" href="{{route('admin.post.index')}}"> Back</a>
+                              <a class="btn btn-danger m-t-15 waves-effect" href="{{route('author.post.index')}}"> Back</a>
                               <button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>
 
                       </div>

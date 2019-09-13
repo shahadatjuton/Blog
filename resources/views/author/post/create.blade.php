@@ -17,18 +17,14 @@
 
 @section('content')
 
-<h1>Update Post</h1>
+<h1>Create Post</h1>
 
 
 <div class="container-fluid">
 
   <!-- Vertical Layout | With Floating Label -->
-  <form action="{{route('admin.post.update', $post->id)}}" method="post" enctype="multipart/form-data">
+  <form action="{{route('author.post.store')}}" method="post" enctype="multipart/form-data">
     @csrf
-
-    @method('PUT')
-
-
           <div class="row clearfix">
               <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                   <div class="card">
@@ -43,7 +39,7 @@
 
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" id="title" class="form-control" name="title" value="{{$post->title}}">
+                                      <input type="text" id="title" class="form-control" name="title" placeholder="{{old('title')}}">
                                       <label class="form-label" for="">Enter unique Post Title</label>
 
                                   </div>
@@ -51,17 +47,14 @@
                               <div class="form-group form-float">
                                   <div class="form-line">
                                     <label for="">Featured Image</label>
-                                      <input type="file" id="name" class="form-control" name="image" value="{{$post->image }}">
+                                      <input type="file" id="name" class="form-control" name="image">
                                   </div>
                               </div>
 
                               <div class="form-group">
-
-                                    <input type="checkbox" id="publish" class="filled-in" name="status"
-                                    value="1" {{ $post->status == true ? 'checked' : '' }} >
-                                    <label for="">Publish</label>
-
-                              </div>
+                                <input type="checkbox" id="publish" class="filled-in" name="status" value="1">
+                                <label for="publish">Publish</label>
+                            </div>
 
 
                       </div>
@@ -83,12 +76,7 @@
                                     <label for="">Select Category</label>
                                     <select name="categories[]" class="form-control show-tick" data-live-searche="true" multiple>
                                       @foreach($categories as $category)
-                                      <option
-
-                                      @foreach( $post->categories as $postCategory)
-                                      {{ $category->id == $postCategory->id ? 'selected' : '' }}
-                                      @endforeach
-                                      value="{{$category->id}}">{{ $category->name }}</option>
+                                      <option value="{{$category->id}}">{{ $category->name }}</option>
 
                                       @endforeach
 
@@ -101,11 +89,7 @@
                                     <label for="">Select Tag</label>
                                     <select name="tags[]" class="form-control show-tick" data-live-searche="true" multiple>
                                       @foreach($tags as $tag)
-                                      <option
-                                      @foreach( $post->tags as $postTag)
-                                      {{ $tag->id == $postTag->id ? 'selected' : '' }}
-                                      @endforeach
-                                         value="{{$tag->id}}">{{$tag->name}}</option>
+                                      <option value="{{$tag->id}}">{{$tag->name}}</option>
 
                                       @endforeach
 
@@ -116,7 +100,7 @@
 
 
                               <br>
-                              <a class="btn btn-danger m-t-15 waves-effect" href="{{route('admin.post.index')}}"> Back</a>
+                              <a class="btn btn-danger m-t-15 waves-effect" href="{{route('author.post.index')}}"> Back</a>
                               <button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>
 
                       </div>
@@ -134,7 +118,7 @@
 
                       </div>
                       <div class="body">
-                        <textarea id="tinymce" name="body">{{ $post->body }}</textarea>
+                        <textarea id="tinymce" name="body"></textarea>
 
                       </div>
                   </div>

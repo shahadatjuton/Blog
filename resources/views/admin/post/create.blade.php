@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Category')
+@section('title', 'Post')
 
 @push('css')
 
@@ -17,41 +17,30 @@
 
 @section('content')
 
-<h1>Create Category</h1>
+<h1>Create Post</h1>
 
 
 <div class="container-fluid">
 
   <!-- Vertical Layout | With Floating Label -->
-  <form action="{{route('admin.category.store')}}" method="post" enctype="multipart/form-data">
+  <form action="{{route('admin.post.store')}}" method="post" enctype="multipart/form-data">
     @csrf
           <div class="row clearfix">
               <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                   <div class="card">
                       <div class="header">
                           <h2>
-                              Add Category
+                              Add Post
 
                           </h2>
-                          <ul class="header-dropdown m-r--5">
-                              <li class="dropdown">
-                                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                      <i class="material-icons">more_vert</i>
-                                  </a>
-                                  <ul class="dropdown-menu pull-right">
-                                      <li><a href="javascript:void(0);">Action</a></li>
-                                      <li><a href="javascript:void(0);">Another action</a></li>
-                                      <li><a href="javascript:void(0);">Something else here</a></li>
-                                  </ul>
-                              </li>
-                          </ul>
+
                       </div>
                       <div class="body">
-                          <form action="{{route('admin.category.store')}}" method="post" enctype="multipart/form-data">
-                            @csrf
+
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" id="name" class="form-control" name="title" placeholder="{{old('title')}}">
+                                      <input type="text" id="title" class="form-control" name="title" placeholder="{{old('title')}}">
+                                      <label class="form-label" for="">Enter unique Post Title</label>
 
                                   </div>
                               </div>
@@ -61,15 +50,13 @@
                                       <input type="file" id="name" class="form-control" name="image">
                                   </div>
                               </div>
+                              
+                              <div class="form-group">
+                                <input type="checkbox" id="publish" class="filled-in" name="status" value="1">
+                                <label for="publish">Publish</label>
+                            </div>
 
-                              <div class="form-group form-float">
 
-                                    <input type="checkbox" id="publish" class="form-control" name="status" value="1">
-                                    <label for="">Publish</label>
-
-                              </div>
-
-                          </form>
                       </div>
                   </div>
               </div>
@@ -80,28 +67,16 @@
                               CATEGORIES & TAGS
 
                           </h2>
-                          <ul class="header-dropdown m-r--5">
-                              <li class="dropdown">
-                                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                      <i class="material-icons">more_vert</i>
-                                  </a>
-                                  <ul class="dropdown-menu pull-right">
-                                      <li><a href="javascript:void(0);">Action</a></li>
-                                      <li><a href="javascript:void(0);">Another action</a></li>
-                                      <li><a href="javascript:void(0);">Something else here</a></li>
-                                  </ul>
-                              </li>
-                          </ul>
+
                       </div>
                       <div class="body">
-                          <form action="{{route('admin.category.store')}}" method="post" enctype="multipart/form-data">
-                            @csrf
+
                               <div class="form-group form-float">
-                                  <div class="form-line">
+                                  <div class="form-line {{ $errors->has('categories') ? 'focused error' : '' }}">
                                     <label for="">Select Category</label>
                                     <select name="categories[]" class="form-control show-tick" data-live-searche="true" multiple>
                                       @foreach($categories as $category)
-                                      <option value="{{$category->id}}">{{$category->name}}</option>
+                                      <option value="{{$category->id}}">{{ $category->name }}</option>
 
                                       @endforeach
 
@@ -110,11 +85,11 @@
                                   </div>
                               </div>
                               <div class="form-group form-float">
-                                  <div class="form-line">
+                                  <div class="form-line {{ $errors->has('tags') ? 'focused error' : '' }}">
                                     <label for="">Select Tag</label>
                                     <select name="tags[]" class="form-control show-tick" data-live-searche="true" multiple>
                                       @foreach($tags as $tag)
-                                      <option value="{{$category->id}}">{{$tag->name}}</option>
+                                      <option value="{{$tag->id}}">{{$tag->name}}</option>
 
                                       @endforeach
 
@@ -127,7 +102,7 @@
                               <br>
                               <a class="btn btn-danger m-t-15 waves-effect" href="{{route('admin.tag.index')}}"> Back</a>
                               <button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>
-                          </form>
+
                       </div>
                   </div>
               </div>
@@ -137,43 +112,14 @@
                   <div class="card">
                       <div class="header">
                           <h2>
-                              Add Category
+                              Add Post
 
                           </h2>
-                          <ul class="header-dropdown m-r--5">
-                              <li class="dropdown">
-                                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                      <i class="material-icons">more_vert</i>
-                                  </a>
-                                  <ul class="dropdown-menu pull-right">
-                                      <li><a href="javascript:void(0);">Action</a></li>
-                                      <li><a href="javascript:void(0);">Another action</a></li>
-                                      <li><a href="javascript:void(0);">Something else here</a></li>
-                                  </ul>
-                              </li>
-                          </ul>
+
                       </div>
                       <div class="body">
-                          <form action="{{route('admin.category.store')}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                              <div class="form-group form-float">
-                                  <div class="form-line">
-                                      <input type="text" id="name" class="form-control" name="name" placeholder="{{old('name')}}">
+                        <textarea id="tinymce" name="body"></textarea>
 
-                                  </div>
-                              </div>
-                              <div class="form-group form-float">
-                                  <div class="form-line">
-                                      <input type="file" id="name" class="form-control" name="image">
-
-                                  </div>
-                              </div>
-
-
-                              <br>
-                              <a class="btn btn-danger m-t-15 waves-effect" href="{{route('admin.tag.index')}}"> Back</a>
-                              <button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>
-                          </form>
                       </div>
                   </div>
               </div>
@@ -192,23 +138,30 @@
 
 
 @push('js')
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+    <!-- TinyMCE -->
+    <script src="{{ asset('assets/backend/plugins/tinymce/tinymce.js') }}"></script>
+    <script>
+        $(function () {
+            //TinyMCE
+            tinymce.init({
+                selector: "textarea#tinymce",
+                theme: "modern",
+                height: 300,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                    'insertdatetime media nonbreaking save table contextmenu directionality',
+                    'emoticons template paste textcolor colorpicker textpattern imagetools'
+                ],
+                toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                toolbar2: 'print preview media | forecolor backcolor emoticons',
+                image_advtab: true
+            });
+            tinymce.suffix = ".min";
+            tinyMCE.baseURL = '{{ asset('assets/backend/plugins/tinymce') }}';
+        });
+    </script>
 
-<!-- Jquery DataTable Plugin Js -->
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/jszip.min.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
-<script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
-
-<!-- Select Plugin Js -->
-<script src="{{asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
-<!-- Multi Select Plugin Js -->
-<script src="{{asset('assets/backend/plugins/multi-select/js/jquery.multi-select.js')}}"></script>
-<!-- Custom Js -->
-
-<script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js')}}"></script>
 @endpush

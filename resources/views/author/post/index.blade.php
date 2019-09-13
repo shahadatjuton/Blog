@@ -18,7 +18,7 @@
           Post Table
         </h2>
 
-        <a class="btn btn-primary waves-effect" href="{{route('admin.post.create' )}}">
+        <a class="btn btn-primary waves-effect" href="{{route('author.post.create' )}}">
 
             <span>Create Post</span>
        </a>
@@ -92,10 +92,10 @@
 
                                     <td>{{$post->updated_at}} At</td>
                                     <td>
-                                      <a class="btn btn-info waves-effect" href="{{route('admin.post.show', $post->id)}}">
+                                      <a class="btn btn-info waves-effect" href="{{route('author.post.show', $post->id)}}">
                                         <i class="material-icons">visibility </i>
                                       </a>
-                                      <a class="btn btn-info waves-effect" href="{{route('admin.post.edit', $post->id)}}">
+                                      <a class="btn btn-info waves-effect" href="{{route('author.post.edit', $post->id)}}">
                                         <i class="material-icons">edit </i>
                                       </a>
 
@@ -103,7 +103,7 @@
                                         <i class="material-icons" >delete</i>
 
                                       </button>
-                                      <form  id="delete-post-{{$post->id}}" action="{{route('admin.post.destroy', $post->id)}}"
+                                      <form  id="delete-post-{{$post->id}}" action="{{route('author.post.destroy', $post->id)}}"
                                       method="post" style="display:none;"
                                         >
                                         @csrf

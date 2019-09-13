@@ -55,7 +55,7 @@
 
 
                     <br>
-                    <a class="btn btn-danger m-t-15 waves-effect" href="{{route('admin.tag.index')}}"> Back</a>
+                    <a class="btn btn-danger m-t-15 waves-effect" href="{{route('admin.category.index')}}"> Back</a>
                     <button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>
                 </form>
             </div>

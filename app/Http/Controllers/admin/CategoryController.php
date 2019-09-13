@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 
+
+
 // use Brian2694\Toastr\Toastr;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -234,14 +236,10 @@ class CategoryController extends Controller
              $imageName=$category->image;
            }
 
-           $category= new Category();
-
            $category->name= $request->name;
            $category->slug= $slug;
            $category->image= $imageName;
            $category->save();
-
-
            Toastr::success('Category  updated successfully', 'success');
            return redirect()->route('admin.category.index');
 
