@@ -68,6 +68,12 @@
                     <span>Post</span>
                 </a>
             </li>
+                <li class="{{ Request::is('admin/settings*') ? 'active' : '' }}">
+                    <a href="{{route('admin.settings')}}">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </a>
+                </li>
 
             @endif
 

@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/','HomeController@index')->name('home');
 
 Auth::routes();
 
@@ -22,15 +20,25 @@ Auth::routes();
 
 Route::group([ 'as'=>'admin.', 'prefix'=> 'admin', 'namespace'=>'admin','middleware'=>['auth','admin']], function(){
 
-  Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-  Route::resource('/tag', 'TagController');
-  Route::resource('/category', 'CategoryController');
-  Route::resource('/post', 'PostController');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('/tag', 'TagController');
+    Route::resource('/category', 'CategoryController');
+    Route::resource('/post', 'PostController');
+    Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
+    Route::get('/settings', 'SettingsController@index')->name('settings');
+    Route::post('/settings/update/profile', 'SettingsController@updateProfile')->name('profile.update');
+    Route::post('/settings/change/password', 'SettingsController@changePassword')->name('profile.password');
+
+
+
+
+
+
 });
 
 Route::group([ 'as'=>'author.', 'prefix'=> 'author', 'namespace'=>'author','middleware'=>['auth','author']], function(){
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/post', 'PostController');
-    
+
 });
