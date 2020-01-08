@@ -12,7 +12,10 @@
 
 @section('content')
 
-<h1>Update Category</h1>
+<h1>
+    <img src="{{asset('storage/category/'.$category->image)}}" alt="Image"  class="img-fluid" style="height: 120px; width: 140px;">
+
+</h1>
 
 
 <!-- Vertical Layout | With Floating Label -->
@@ -21,8 +24,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    Edit Category
-
+                    Update Category
                 </h2>
 
             </div>

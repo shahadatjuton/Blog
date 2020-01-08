@@ -8,6 +8,13 @@
 <link href="{{ asset('assets/frontend/css/home/styles.css')}}" rel="stylesheet">
 
 <link href="{{ asset('assets/frontend/css/home/responsive.css')}}" rel="stylesheet">
+
+    <style>
+        .favourite_post{
+            color: #1a31fa;
+        }
+    </style>
+
 @endpush
 
 @section('content')
@@ -21,12 +28,12 @@
                 <div class="swiper-slide">
                     <a class="slider-category" href="#">
                         <div class="blog-image">
-                            <img src="{{asset('storage/Category/slider/'.$category->image)}}" alt="Image"  class="img-fluid">
+                            <img src="{{asset('storage/category/slider/'.$category->image)}}" alt="Image"  class="img-fluid">
                         </div>
                         <div class="category">
                             <div class="display-table center-text">
                                 <div class="display-table-cell">
-                                    <h3><b>{{$category->title}}</b></h3>
+                                    <h3><b>{{$category->name}}</b></h3>
                                 </div>
                             </div>
                         </div>
@@ -50,16 +57,35 @@
             <div class="blog-image">
                 <img src="{{asset('storage/post/'.$post->image)}}" alt="Image"  class="img-fluid">
             </div>
-            <a class="avatar" href="#"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
+            <a class="avatar" href="#"><img src="{{asset('storage/profile/'.$post->user->image)}}" alt="Profile Image"></a>
 
             <div class="blog-info">
 
-              <h4 class="title"><a href="#"><b>{{$post->title}}</b></a></h4>
+              <h4 class="title"><a href="{{route('post.details', $post->slug)}}"><b>{{$post->title}}</b></a></h4>
 
               <ul class="post-footer">
-                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+
+                <li>
+                    @guest
+                        <a href="javascript:void(0);"
+                    onclick="toastr.info('You have to login first to add the post in the favourite list.','info',{
+                            closeButton:true,
+                            progressBar:true,
+                        })"><i class="ion-heart"></i>{{ $post->favourite_to_users()->count() }}</a>
+
+                    @else
+
+                        <a href="javascript:void(0);"
+                           onclick="document.getElementById('favourite-post-{{$post->id}}').submit();"
+                        class="{{!Auth::user()->favourite_posts()->where('post_id',$post->id)->count() == 0 ? 'favourite_post':''}}"><i class="ion-heart"></i>{{ $post->favourite_to_users()->count() }}</a>
+                        <form id="favourite-post-{{$post->id}}" action="{{route('post.favourite',$post->id)}}" method="post">
+                            @csrf
+                        </form>
+
+                    @endguest
+                </li>
                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
               </ul>
 
             </div><!-- blog-info -->
@@ -70,7 +96,7 @@
 @endforelse
     </div><!-- row -->
 
-    <a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+    <a class="load-more-btn" href="#" onclick="alert('ok')"><b>LOAD MORE</b></a>
 
   </div><!-- container -->
 </section><!-- section -->

@@ -68,6 +68,12 @@
                     <span>Post</span>
                 </a>
             </li>
+                <li class="{{ Request::is('admin/favourite*') ? 'active' : '' }}">
+                    <a href="{{route('favourite.posts')}}">
+                        <i class="material-icons">favorite</i>
+                        <span>Favourite Posts</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/settings*') ? 'active' : '' }}">
                     <a href="{{route('admin.settings')}}">
                         <i class="material-icons">settings</i>
@@ -95,6 +101,12 @@
                     <span>Post</span>
                 </a>
             </li>
+                <li class="{{ Request::is('author/favourite*') ? 'active' : '' }}">
+                    <a href="{{route('favourite.posts')}}">
+                        <i class="material-icons">favorite</i>
+                        <span>Favourite Posts</span>
+                    </a>
+                </li>
 
             @endif
 

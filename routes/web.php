@@ -12,10 +12,20 @@
 */
 
 Route::get('/','HomeController@index')->name('home');
+Route::get('post/{slug}','PostController@details')->name('post.details');
+
 
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['middleware'=>['auth']], function (){
+
+    Route::post('favourite/post/{id}','FavouriteController@favourite')->name('post.favourite');
+    Route::get('favourite/posts/','FavouriteController@favouritePosts')->name('favourite.posts');
+
+});
 
 
 Route::group([ 'as'=>'admin.', 'prefix'=> 'admin', 'namespace'=>'admin','middleware'=>['auth','admin']], function(){

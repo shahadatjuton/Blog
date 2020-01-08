@@ -69,7 +69,7 @@ class CategoryController extends Controller
           //==========Check and set Image Directory==================
           if (!Storage::disk('public')->exists('category')) {
 
-            Storage::disk('public')->makeDirectory('Category');
+            Storage::disk('public')->makeDirectory('category');
 
             }
 
@@ -88,7 +88,7 @@ class CategoryController extends Controller
 
           if (!Storage::disk('public')->exists('category/slider')) {
 
-            Storage::disk('public')->makeDirectory('Category/slider');
+            Storage::disk('public')->makeDirectory('category/slider');
 
             }
 
@@ -191,7 +191,7 @@ class CategoryController extends Controller
                //==========Check and set Image Directory==================
                if (!Storage::disk('public')->exists('category')) {
 
-                 Storage::disk('public')->makeDirectory('Category');
+                 Storage::disk('public')->makeDirectory('category');
 
                  }
 
@@ -199,7 +199,7 @@ class CategoryController extends Controller
 
                  if (Storage::disk('public')->exists('category/'. $category->image )) {
 
-                   Storage::disk('public')->delete('Category/'. $category->image );
+                   Storage::disk('public')->delete('category/'. $category->image );
 
                    }
                //==========Check and upload Image  ==================
@@ -213,14 +213,14 @@ class CategoryController extends Controller
 
                if (!Storage::disk('public')->exists('category/slider')) {
 
-                 Storage::disk('public')->makeDirectory('Category/slider');
+                 Storage::disk('public')->makeDirectory('category/slider');
 
                  }
                  //===================Delete old slider image==================
 
                  if (Storage::disk('public')->exists('category/slider/'. $category->image )) {
 
-                   Storage::disk('public')->delete('Category/slider/'. $category->image );
+                   Storage::disk('public')->delete('category/slider/'. $category->image );
 
                    }
                  //==========Check and set Image Directory==================

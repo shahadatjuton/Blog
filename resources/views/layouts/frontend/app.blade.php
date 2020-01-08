@@ -23,8 +23,7 @@
 
     <!-- Toaster css -->
 
-  <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
+    <link  href="{{ asset('assets/backend/css/toastr.min.css')}}" rel="stylesheet" />
 
 
 
@@ -53,12 +52,11 @@
 
   <script src="{{ asset('assets/frontend/js/scripts.js')}}"></script>
 
-  <!-- Toaster JS -->
+<!-- Toaster JS -->
 
-  <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  {!! Toastr::message() !!}
-
+<!-- <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script> -->
+<script src="{{ asset('assets/backend/js/toastr.min.js')}}"></script>
+{!! Toastr::message() !!}
 
 @stack('js')
 
