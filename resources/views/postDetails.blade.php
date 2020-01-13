@@ -156,7 +156,7 @@
 
                             <div class="blog-info">
 
-                                <h4 class="title"><a href="#"><b>{{$random->title}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details',$random->slug)}}"><b>{{$random->title}}</b></a></h4>
 
                                 <ul class="post-footer">
 
@@ -166,21 +166,21 @@
                                                onclick="toastr.info('You have to login first to add the post in the favourite list.','info',{
                             closeButton:true,
                             progressBar:true,
-                        })"><i class="ion-heart"></i>{{ $post->favourite_to_users()->count() }}</a>
+                        })"><i class="ion-heart"></i>{{ $random->favourite_to_users()->count() }}</a>
 
                                         @else
 
                                             <a href="javascript:void(0);"
-                                               onclick="document.getElementById('favourite-post-{{$post->id}}').submit();"
-                                               class="{{!Auth::user()->favourite_posts()->where('post_id',$post->id)->count() == 0 ? 'favourite_post':''}}"><i class="ion-heart"></i>{{ $post->favourite_to_users()->count() }}</a>
-                                            <form id="favourite-post-{{$post->id}}" action="{{route('post.favourite',$post->id)}}" method="post">
+                                               onclick="document.getElementById('favourite-post-{{$random->id}}').submit();"
+                                               class="{{!Auth::user()->favourite_posts()->where('post_id',$random->id)->count() == 0 ? 'favourite_post':''}}"><i class="ion-heart"></i>{{ $post->favourite_to_users()->count() }}</a>
+                                            <form id="favourite-post-{{$random->id}}" action="{{route('post.favourite',$random->id)}}" method="post">
                                                 @csrf
                                             </form>
 
                                         @endguest
                                     </li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$random->view_count}}</a></li>
                                 </ul>
 
 
@@ -201,20 +201,20 @@
 
                 <div class="col-lg-8 col-md-12">
                     <div class="comment-form">
-                        <form method="post">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" action="{{route('comment.store',$post->id)}}">
+                            @csrf
                             <div class="row">
-
-                                <div class="col-sm-6">
-                                    <input type="text" aria-required="true" name="contact-form-name" class="form-control"
-                                           placeholder="Enter your name" aria-invalid="true" required >
-                                </div><!-- col-sm-6 -->
-                                <div class="col-sm-6">
-                                    <input type="email" aria-required="true" name="contact-form-email" class="form-control"
-                                           placeholder="Enter your email" aria-invalid="true" required>
-                                </div><!-- col-sm-6 -->
-
                                 <div class="col-sm-12">
-									<textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
+									<textarea name="comment" rows="2" class="text-area-messge form-control"
                                               placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
                                 </div><!-- col-sm-12 -->
                                 <div class="col-sm-12">
@@ -225,93 +225,34 @@
                         </form>
                     </div><!-- comment-form -->
 
-                    <h4><b>COMMENTS(12)</b></h4>
+                    <h4><b>COMMENTS({{$post->comments->count()}})</b></h4>
 
                     <div class="commnets-area">
-
+@forelse($post->comments as $comment)
                         <div class="comment">
 
                             <div class="post-info">
 
                                 <div class="left-area">
-                                    <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img src="{{ asset('storage/profile/'.$comment->user->image) }}" alt="Profile Image"></a>
                                 </div>
 
                                 <div class="middle-area">
-                                    <a class="name" href="#"><b>Katy Liu</b></a>
-                                    <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
+                                    <a class="name" href="#"><b>{{$comment->user->name}}</b></a>
+                                    <h6 class="date">{{$comment->created_at->diffForHumans()}}</h6>
                                 </div>
 
-                                <div class="right-area">
-                                    <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                                </div>
 
                             </div><!-- post-info -->
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                                Ut enim ad minim veniam</p>
+                            <p>{{$comment->comment}}</p>
 
                         </div>
-
-                        <div class="comment">
-                            <h5 class="reply-for">Reply for <a href="#"><b>Katy Lui</b></a></h5>
-
-                            <div class="post-info">
-
-                                <div class="left-area">
-                                    <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                                </div>
-
-                                <div class="middle-area">
-                                    <a class="name" href="#"><b>Katy Liu</b></a>
-                                    <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-                                </div>
-
-                                <div class="right-area">
-                                    <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                                </div>
-
-                            </div><!-- post-info -->
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                                Ut enim ad minim veniam</p>
-
-                        </div>
-
-                    </div><!-- commnets-area -->
-
-                    <div class="commnets-area ">
-
-                        <div class="comment">
-
-                            <div class="post-info">
-
-                                <div class="left-area">
-                                    <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                                </div>
-
-                                <div class="middle-area">
-                                    <a class="name" href="#"><b>Katy Liu</b></a>
-                                    <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-                                </div>
-
-                                <div class="right-area">
-                                    <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                                </div>
-
-                            </div><!-- post-info -->
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                                Ut enim ad minim veniam</p>
-
-                        </div>
-
-                    </div><!-- commnets-area -->
-
-                    <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
+@empty
+    <div class="bg-info">
+        <h4> No comment is available for this post! </h4>
+    </div>
+@endforelse
 
                 </div><!-- col-lg-8 col-md-12 -->
 

@@ -13,6 +13,7 @@
 
 Route::get('/','HomeController@index')->name('home');
 Route::get('post/{slug}','PostController@details')->name('post.details');
+Route::get('all/post/','PostController@all')->name('post.all');
 
 
 Auth::routes();
@@ -24,6 +25,9 @@ Route::group(['middleware'=>['auth']], function (){
 
     Route::post('favourite/post/{id}','FavouriteController@favourite')->name('post.favourite');
     Route::get('favourite/posts/','FavouriteController@favouritePosts')->name('favourite.posts');
+
+    Route::post('post/comment/{id}','CommentController@store')->name('comment.store');
+
 
 });
 
