@@ -38,11 +38,15 @@ Route::group([ 'as'=>'admin.', 'prefix'=> 'admin', 'namespace'=>'admin','middlew
     Route::resource('/tag', 'TagController');
     Route::resource('/category', 'CategoryController');
     Route::resource('/post', 'PostController');
+
     Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
+
     Route::get('/settings', 'SettingsController@index')->name('settings');
     Route::post('/settings/update/profile', 'SettingsController@updateProfile')->name('profile.update');
     Route::post('/settings/change/password', 'SettingsController@changePassword')->name('profile.password');
 
+    Route::get('comments/', 'CommentController@index')->name('comment.index');
+    Route::delete('comments/destroy/{id}', 'CommentController@destroy')->name('comment.destroy');
 
 
 
@@ -54,5 +58,10 @@ Route::group([ 'as'=>'author.', 'prefix'=> 'author', 'namespace'=>'author','midd
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/post', 'PostController');
+
+
+    Route::get('comments/', 'CommentController@index')->name('comment.index');
+    Route::delete('comments/destroy/{id}', 'CommentController@destroy')->name('comment.destroy');
+
 
 });

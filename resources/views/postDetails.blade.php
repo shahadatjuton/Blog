@@ -92,7 +92,7 @@
 
                                     @endguest
                                 </li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="#"><i class="ion-chatbubble"></i>{{$post->comments->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
                             </ul>
 
@@ -179,7 +179,7 @@
 
                                         @endguest
                                     </li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="#"><i class="ion-chatbubble"></i>{{$random->comments->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$random->view_count}}</a></li>
                                 </ul>
 
