@@ -23,9 +23,10 @@
     </ul><!-- main-menu -->
 
     <div class="src-area">
-      <form>
+      <form method="post" action="{{route('search')}}">
+          @csrf
         <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-        <input class="src-input" type="text" placeholder="Type of search">
+        <input class="src-input" type="text" placeholder="Type of search" name="query" value="{{isset($query) ? $query:''}}">
       </form>
     </div>
 

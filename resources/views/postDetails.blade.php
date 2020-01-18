@@ -65,7 +65,7 @@
 
                             <ul class="tags">
                                 @foreach($post->tags as $tag)
-                                    <li><a href="#">{{$tag->name}}</a></li>
+                                    <li><a href="{{route('post.tag',$tag->slug)}}">{{$tag->name}}</a></li>
                                 @endforeach
                             </ul>
                         </div><!-- blog-post-inner -->
@@ -113,7 +113,7 @@
                     <div class="single-post info-area">
 
                         <div class="sidebar-area about-area">
-                            <h4 class="title"><b>ABOUT BONA</b></h4>
+                            <h4 class="title"><b>ABOUT AUTHOR</b></h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                                 ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
                                 Ut enim ad minim veniam</p>
@@ -125,7 +125,7 @@
                             <h4 class="title"><b>CATEGORY CLOUD</b></h4>
                             <ul>
                                 @foreach($post->categories as $category)
-                                <li><a href="#">{{$category->name}}</a></li>
+                                <li><a href="{{route('post.category',$category->slug)}}">{{$category->name}}</a></li>
                                  @endforeach
                             </ul>
 

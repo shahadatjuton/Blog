@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
 
 
-@section('title','All Post')
+@section('title','Category Post')
 
 
 @push('css')
@@ -16,13 +16,14 @@
     }
 
 
-
     .slider {
         height: 400px;
         width: 100%;
-        background-image: url({{asset('assets/frontend/images/category-1.jpg')}});
+        background-image: url({{asset('storage/category/'.$category->image)}});
         background-size: cover;
     }
+
+
 </style>
 
 
@@ -32,7 +33,7 @@
 @section('content')
 
     <div class="slider display-table center-text">
-        <h1 class="title display-table-cell"><b>All Posts</b></h1>
+        <h1 class="title display-table-cell"><b>{{$category->name}}</b></h1>
     </div><!-- slider -->
 
     <section class="blog-area section">
@@ -84,7 +85,7 @@
                 </div><!-- col-lg-4 col-md-6 -->
 @endforeach
             </div><!-- row -->
-          <div style="margin-left: 500px;"> {{ $posts->links() }} </div>
+{{--          <div style="margin-left: 500px;"> {{ $category->posts()->links() }} </div>--}}
         </div><!-- container -->
     </section><!-- section -->
 

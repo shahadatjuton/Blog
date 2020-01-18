@@ -13,7 +13,7 @@ class SubscriberController extends Controller
     public function store(request $request)
     {
       $this->validate($request,[
-        'email'=>'required|unique:subscribers'
+        'email'=>'required|email|unique:subscribers'
       ]);
 
       $subscriber = new Subscriber();

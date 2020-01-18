@@ -12,8 +12,18 @@
 */
 
 Route::get('/','HomeController@index')->name('home');
+
 Route::get('post/{slug}','PostController@details')->name('post.details');
 Route::get('all/post/','PostController@all')->name('post.all');
+Route::get('category/posts/{slug}','PostController@categoryPost')->name('post.category');
+Route::get('tag/posts/{slug}','PostController@tagPost')->name('post.tag');
+
+Route::post('posts/search','PostController@search')->name('search');
+
+Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
+
+
+
 
 
 Auth::routes();
@@ -39,7 +49,10 @@ Route::group([ 'as'=>'admin.', 'prefix'=> 'admin', 'namespace'=>'admin','middlew
     Route::resource('/category', 'CategoryController');
     Route::resource('/post', 'PostController');
 
-    Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
+    Route::get('/pending/post', 'PostController@pending')->name('post.pending');
+    Route::put('/post/approve/{id}','PostController@approval')->name('post.approve');
+
+
 
     Route::get('/settings', 'SettingsController@index')->name('settings');
     Route::post('/settings/update/profile', 'SettingsController@updateProfile')->name('profile.update');
@@ -48,6 +61,8 @@ Route::group([ 'as'=>'admin.', 'prefix'=> 'admin', 'namespace'=>'admin','middlew
     Route::get('comments/', 'CommentController@index')->name('comment.index');
     Route::delete('comments/destroy/{id}', 'CommentController@destroy')->name('comment.destroy');
 
+    Route::get('authors/', 'UserController@index')->name('user.index');
+    Route::delete('author/destroy/{id}', 'UserController@destroy')->name('user.destroy');
 
 
 
@@ -64,4 +79,10 @@ Route::group([ 'as'=>'author.', 'prefix'=> 'author', 'namespace'=>'author','midd
     Route::delete('comments/destroy/{id}', 'CommentController@destroy')->name('comment.destroy');
 
 
+});
+
+
+View::composer('layouts.frontend.footer',function ($view){
+    $categories = \App\Category::all();
+    $view->with('categories',$categories);
 });

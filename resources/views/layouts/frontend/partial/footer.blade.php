@@ -19,19 +19,16 @@
 
         </div><!-- footer-section -->
       </div><!-- col-lg-4 col-md-6 -->
-
+@php
+$categories = \App\Category::all();
+@endphp
       <div class="col-lg-4 col-md-6">
           <div class="footer-section">
           <h4 class="title"><b>CATAGORIES</b></h4>
           <ul>
-            <li><a href="#">BEAUTY</a></li>
-            <li><a href="#">HEALTH</a></li>
-            <li><a href="#">MUSIC</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">SPORT</a></li>
-            <li><a href="#">DESIGN</a></li>
-            <li><a href="#">TRAVEL</a></li>
+              @foreach($categories as $category)
+              <li><a href="{{route('post.category',$category->slug)}}">{{$category->name}}</a></li>
+              @endforeach
           </ul>
         </div><!-- footer-section -->
       </div><!-- col-lg-4 col-md-6 -->
@@ -40,9 +37,19 @@
         <div class="footer-section">
 
             <h4 class="title"><b>SUBSCRIBE</b></h4>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="input-area">
-                <form>
-                    <input class="email-input" type="text" placeholder="Enter your email">
+                <form method="post" action="{{route('subscriber.store')}}">
+                    @csrf
+                    <input class="email-input" type="text" placeholder="Enter your email" name="email">
                     <button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
                 </form>
             </div>
