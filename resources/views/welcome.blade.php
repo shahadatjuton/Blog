@@ -28,8 +28,7 @@
                 @forelse($categories as $category)
                     <div class="swiper-slide">
                         <a class="slider-category" href="{{ route('post.category',$category->slug) }}">
-                            <div class="blog-image"><img src="{{ asset('storage/category/slider/'.$category->image) }}" alt="{{ $category->name }}"></div>
-
+                            <div class="blog-image"><img src="{{ asset('storage/category/slider/'.$category->image) }}" alt="Image"></div>
                             <div class="category">
                                 <div class="display-table center-text">
                                     <div class="display-table-cell">
@@ -63,7 +62,7 @@
             <div class="blog-image">
                 <img src="{{asset('storage/post/'.$post->image)}}" alt="Image"  class="img-fluid">
             </div>
-            <a class="avatar" href="#"><img src="{{asset('storage/profile/'.$post->user->image)}}" alt="Profile Image"></a>
+            <a class="avatar" href="{{route('profile', $post->user->name)}}"><img src="{{asset('storage/profile/'.$post->user->image)}}" alt="Profile Image"></a>
 
             <div class="blog-info">
 

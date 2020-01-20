@@ -6,11 +6,13 @@
       <div class="col-lg-4 col-md-6">
         <div class="footer-section">
 
-          <a class="logo" href="#"><img src="images/logo.png" alt="Logo Image"></a>
-          <p class="copyright">Bona @ 2017. All rights reserved.</p>
+          <a class="logo" href="#"><h4>My Blog</h4></a>
+          <p class="copyright">@2019 All rights reserved.</p>
           <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-          <ul class="icons">
-            <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
+            <p class="copyright">Developed by <a href="https://colorlib.com" target="_blank">Shahadat Hossain</a></p>
+
+            <ul class="icons">
+            <li><a href="https://www.facebook.com/"><i class="ion-social-facebook-outline"></i></a></li>
             <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
             <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
             <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>

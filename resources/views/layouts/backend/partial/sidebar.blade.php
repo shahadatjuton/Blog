@@ -132,6 +132,13 @@
                     </a>
                 </li>
 
+                <li class="{{ Request::is('author/settings*') ? 'active' : '' }}">
+                    <a href="{{route('author.settings')}}">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+
             @endif
 
 <!-- ================End author Side bar ============================  -->

@@ -47,7 +47,7 @@
                             <div class="post-info">
 
                                 <div class="left-area">
-                                    <a class="avatar" href="#"><img src="{{asset('storage/profile/'. $post->user->image)}}" alt="Profile Image"></a>
+                                    <a class="avatar" href="{{route('profile', $post->user->name)}}"><img src="{{asset('storage/profile/'. $post->user->image)}}" alt="Profile Image"></a>
                                 </div>
 
                                 <div class="middle-area">
@@ -151,7 +151,7 @@
 
                             <div class="blog-image"><img src="{{asset('storage/post/'.$random->image)}}" alt="Blog Image"></div>
 
-                            <a class="avatar" href="#"><img src="{{asset('storage/profile/'. $random->user->image)}}" alt="Profile Image"></a>
+                            <a class="avatar" href="{{route('profile', $random->user->name)}}"><img src="{{asset('storage/profile/'. $random->user->image)}}" alt="Profile Image"></a>
 
 
                             <div class="blog-info">
@@ -234,7 +234,7 @@
                             <div class="post-info">
 
                                 <div class="left-area">
-                                    <a class="avatar" href="#"><img src="{{ asset('storage/profile/'.$comment->user->image) }}" alt="Profile Image"></a>
+                                    <a class="avatar" href="{{route('profile', $comment->user->name)}}"><img src="{{ asset('storage/profile/'.$comment->user->image) }}" alt="Profile Image"></a>
                                 </div>
 
                                 <div class="middle-area">

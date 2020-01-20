@@ -22,6 +22,8 @@ Route::post('posts/search','PostController@search')->name('search');
 
 Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
 
+Route::get('profile/{name}','ProfileController@profile')->name('profile');
+
 
 
 
@@ -77,6 +79,11 @@ Route::group([ 'as'=>'author.', 'prefix'=> 'author', 'namespace'=>'author','midd
 
     Route::get('comments/', 'CommentController@index')->name('comment.index');
     Route::delete('comments/destroy/{id}', 'CommentController@destroy')->name('comment.destroy');
+
+
+    Route::get('/settings', 'SettingsController@index')->name('settings');
+    Route::post('/settings/update/profile', 'SettingsController@updateProfile')->name('profile.update');
+    Route::post('/settings/change/password', 'SettingsController@changePassword')->name('profile.password');
 
 
 });

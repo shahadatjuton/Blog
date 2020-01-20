@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Psy\Util\Str;
 
 class RegisterController extends Controller
 {
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -37,7 +39,14 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        if(Auth::check() && Auth::user()->role->id==1)
+        {
+            $this->redirectTo= route('admin.dashboard');
+        }
+        else {
+            $this->redirectTo= route('author.dashboard');
+        }
+        $this->middleware('guest')->except('logout');
     }
 
     /**
@@ -64,6 +73,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'role_id'=>2,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
